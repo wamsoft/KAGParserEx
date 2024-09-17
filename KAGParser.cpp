@@ -1434,7 +1434,7 @@ void tTJSNI_KAGParser::PushCallStack()
 	FindNearestLabel(CurLine, labelline, labelname);
 	if(labelline < 0) labelline = 0;
 
-	const wchar_t *curline_content;
+	const tjs_char *curline_content;
 	if(Lines && CurLine < LineCount)
 		curline_content = Lines[CurLine].Start;
 	else

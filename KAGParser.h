@@ -15,6 +15,7 @@
 #ifndef __TP_STUB_H__
 #include "tjsNative.h"
 #include "tjsHashSearch.h"
+#endif
 
 
 /*[*/
@@ -28,7 +29,6 @@ enum tTVPKAGDebugLevel
 	tkdlVerbose // complete report ( verbose )
 };
 /*]*/
-#endif
 
 
 //---------------------------------------------------------------------------
