@@ -18,7 +18,6 @@ add_subdirectory(../tp_stub ${CMAKE_CURRENT_BINARY_DIR}/tp_stub)
 endif()
 
 add_library(${PROJECT_NAME} SHARED
-    KAGParser.cpp
     KAGParser.h
     KAGParserEx.cpp
     KAGParserEx.hpp

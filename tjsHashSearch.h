@@ -11,10 +11,6 @@
 #ifndef HashSearchH
 #define HashSearchH
 
-#ifndef KAGPARSER_EX_PLUGIN
-#include "tjs.h"
-#endif
-
 #define TJS_HS_DEFAULT_HASH_SIZE 64
 #define TJS_HS_HASH_USING	0x1
 #define TJS_HS_HASH_LV1	0x2
