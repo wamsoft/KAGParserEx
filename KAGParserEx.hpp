@@ -1,11 +1,6 @@
 #ifndef KAGParserExHPP
 #define KAGParserExHPP
 
-#ifndef NO_V2LINK
-#include <windows.h>
-#endif
-
-
 #include "tp_stub.h"
 
 #define TVP_KAGPARSER_EX_PLUGIN
