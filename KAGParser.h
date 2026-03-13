@@ -12,6 +12,9 @@
 #ifndef KAGParserH
 #define KAGParserH
 
+#include <vector>
+#include <cstring>
+
 //---------------------------------------------------------------------------
 
 /*[*/
