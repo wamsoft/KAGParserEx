@@ -11,6 +11,9 @@
 #ifndef HashSearchH
 #define HashSearchH
 
+#include <new>
+#include <cstddef>
+
 #define TJS_HS_DEFAULT_HASH_SIZE 64
 #define TJS_HS_HASH_USING	0x1
 #define TJS_HS_HASH_LV1	0x2
@@ -32,7 +35,7 @@ public:
 	{
 		const char *p = (const char*)&val;
 		const char *plim = (const char*)&val + sizeof(T);
-		register tjs_uint32 ret = 0;
+		tjs_uint32 ret = 0;
 		while(p<plim)
 		{
 			ret += *p;
@@ -612,27 +615,27 @@ public:
 	void Add(const KeyT &key, const ValueT &value)
 	{
 		inherited::Add(key, value);
-		if(GetCount() > MaxCount)
+		if(this->GetCount() > MaxCount)
 		{
-			ChopLast(GetCount() - MaxCount);
+			this->ChopLast(this->GetCount() - MaxCount);
 		}
 	}
 
 	void AddWithHash(const KeyT &key, tjs_uint32 hash, const ValueT &value)
 	{
 		inherited::AddWithHash(key, hash, value);
-		if(GetCount() > MaxCount)
+		if(this->GetCount() > MaxCount)
 		{
-			ChopLast(GetCount() - MaxCount);
+			this->ChopLast(this->GetCount() - MaxCount);
 		}
 	}
 
 	void SetMaxCount(tjs_uint maxcount)
 	{
 		MaxCount = maxcount;
-		if(GetCount() > MaxCount)
+		if(this->GetCount() > MaxCount)
 		{
-			ChopLast(GetCount() - MaxCount);
+			this->ChopLast(this->GetCount() - MaxCount);
 		}
 	}
 

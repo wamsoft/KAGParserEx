@@ -8,10 +8,11 @@
 //---------------------------------------------------------------------------
 // KAG Parser Utility Class
 //---------------------------------------------------------------------------
-#ifndef TVP_KAGPARSER_EX_PLUGIN
+#ifdef TVP_KAGPARSER_EX_PLUGIN
+#include "tp_stub.h"
+#include "KAGParser.h"
+#else
 #include "tjsCommHead.h"
-
-
 #include "KAGParser.h"
 #include "StorageIntf.h"
 #include "tjsDictionary.h"

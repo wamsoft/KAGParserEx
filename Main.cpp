@@ -1,5 +1,18 @@
 #include "KAGParserEx.hpp"
 
+#ifndef _WIN32
+  typedef int32_t HRESULT;
+  #ifndef EXPORT
+    #define EXPORT(hr) extern "C" __attribute__((visibility("default"))) hr
+  #endif
+    #ifndef S_OK
+    #define S_OK ((HRESULT)0L)
+  #endif
+  #ifndef E_FAIL
+    #define E_FAIL ((HRESULT)0x80004005L)
+  #endif
+#endif
+
 static iTJSDispatch2 *origKAGParser = NULL;
 
 void kagparserex_init()
@@ -26,6 +39,8 @@ void kagparserex_init()
 #define EXPORT(hr) static hr STDCALL
 
 #else
+
+#ifdef _WIN32
 
 #if defined(_MSC_VER)
     #define DLL_EXPORT  __declspec(dllexport)
@@ -58,6 +73,8 @@ int WINAPI DllEntryPoint(HINSTANCE hinst, unsigned long reason, void* lpReserved
 {
 	return 1;
 }
+
+#endif
 
 #endif
 
