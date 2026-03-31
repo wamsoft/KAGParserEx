@@ -53,11 +53,12 @@ asm (".ascii \" -export:V2Link=V2Link@4 -export:V2Unlink=V2Unlink@0\"");
 # endif
 #endif
 
-
+#ifdef _WIN32
 int WINAPI DllEntryPoint(HINSTANCE hinst, unsigned long reason, void* lpReserved)
 {
 	return 1;
 }
+#endif
 
 #endif
 

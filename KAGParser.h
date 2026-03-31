@@ -12,6 +12,8 @@
 #ifndef KAGParserH
 #define KAGParserH
 
+#include <cstring>
+
 //---------------------------------------------------------------------------
 
 /*[*/
