@@ -35,6 +35,8 @@ void kagparserex_init()
 
 #define EXPORT(hr) extern "C" DLL_EXPORT hr STDCALL
 
+#ifdef _WIN32
+
 #ifdef _MSC_VER
 # if defined(_M_AMD64) || defined(_M_X64)
 #  pragma comment(linker, "/EXPORT:V2Link")
@@ -53,7 +55,6 @@ asm (".ascii \" -export:V2Link=V2Link@4 -export:V2Unlink=V2Unlink@0\"");
 # endif
 #endif
 
-#ifdef _WIN32
 int WINAPI DllEntryPoint(HINSTANCE hinst, unsigned long reason, void* lpReserved)
 {
 	return 1;
