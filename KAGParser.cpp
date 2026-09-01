@@ -1106,6 +1106,24 @@ void tTJSNI_KAGParser::GoToLabel(const ttstr &name)
 	BreakConditionAndMacro();
 }
 //---------------------------------------------------------------------------
+// ラベルの有無だけを調べる。 GoToLabel と違って現在位置は動かさず、
+// 見つからなくても例外を投げない。
+//
+// 台本側で「このラベルがあるか」を試すのに goToLabel + try/catch を使うと、
+// 外れるたびに例外の生成と 「An exception occured at ...」 + trace のログ出力が
+// 走る。 コマンド入力型のゲームだと 1 回の入力で何度も試すため、 ログが埋まり
+// CPU も無駄になる。 判定自体はラベルキャッシュ 1 回引くだけなので、
+// その用途には本メソッドを使う。
+bool tTJSNI_KAGParser::HasLabel(const ttstr &name)
+{
+	// name は '*' 始まりであること (GoToLabel と同じ前提)
+	if(name.IsEmpty()) return false;
+	if(!Scenario) return false;
+
+	Scenario->EnsureLabelCache();
+	return Scenario->GetLabelCache().Find(name) != NULL;
+}
+//---------------------------------------------------------------------------
 void tTJSNI_KAGParser::GoToStorageAndLabel(const ttstr &storage,
 	const ttstr &label)
 {
@@ -2567,6 +2585,17 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/goToLabel)
 	return TJS_S_OK;
 }
 TJS_END_NATIVE_METHOD_DECL(/*func. name*/goToLabel)
+//----------------------------------------------------------------------
+// ラベルの有無を返すだけ。 goToLabel + try/catch でラベルを探ると、
+// 外れるたびに例外生成 + trace ログが出て重い (HasLabel のコメント参照)。
+TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/hasLabel)
+{
+	TJS_GET_NATIVE_INSTANCE(/*var. name*/_this, /*var. type*/tTJSNI_KAGParser);
+	if(numparams < 1) return TJS_E_BADPARAMCOUNT;
+	if(result) *result = (tjs_int)(_this->HasLabel(*param[0]) ? 1 : 0);
+	return TJS_S_OK;
+}
+TJS_END_NATIVE_METHOD_DECL(/*func. name*/hasLabel)
 //----------------------------------------------------------------------
 TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/callLabel)
 {

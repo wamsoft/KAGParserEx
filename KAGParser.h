@@ -300,6 +300,7 @@ public:
 	void LoadScenario(const ttstr & name);
 	const ttstr & GetStorageName() const { return StorageName; }
 	void GoToLabel(const ttstr &name); // search label and set current position
+	bool HasLabel(const ttstr &name);  // check label existence only (no move, no throw)
 	void GoToStorageAndLabel(const ttstr &storage, const ttstr &label);
 	void CallLabel(const ttstr &name);
 private:
